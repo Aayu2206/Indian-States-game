@@ -27,11 +27,12 @@ while len(correct_guesses_list) < 29:
     answer_state = screen.textinput(title= f"{score}/29 States Correct",prompt="What's another state name?").title()
 
     if answer_state == "Exit":
-        missing_states = []
-        for state in states_list:
+        missing_states = [ state for state in states_list if state not in correct_guesses_list]
+        # missing_states = []
+        # for state in states_list:
+        #     if state not in correct_guesses_list:
+        #         missing_states.append(state)
 
-            if state not in correct_guesses_list:
-                missing_states.append(state)
         #generates a file which contains missing states from the map 
         new_data = pandas.DataFrame(missing_states)
         new_data.to_csv("states_to_learn.csv")
